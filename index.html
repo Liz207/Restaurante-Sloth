@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurante Sloth</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Roboto',sans-serif;background:#f4f1ec}
+header{background:#3e5c3a;color:white;text-align:center;padding:20px}
+.logo{width:120px;
+    height:80px;
+    object-fit:cover;
+    border-radius:50%;}
+h1{font-family:'Playfair Display',serif;margin:10px 0}
+.container{padding:20px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tab{padding:10px 15px;background:#8b5e3c;color:white;border-radius:20px;cursor:pointer;font-size:14px}
+.tab.active{background:#3e5c3a}
+.menu-item{background:white;margin:15px 0;padding:15px;border-radius:12px;display:flex;gap:15px;align-items:center;box-shadow:0 3px 8px rgba(0,0,0,0.1)}
+.menu-item img{width:100px;height:100px;border-radius:10px;object-fit:cover}
+.menu-info{flex:1}
+.price{color:#3e5c3a;font-weight:bold}
+.btn{background:#8b5e3c;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;font-size:14px}
+.language-toggle{margin-top:10px;background:white;color:#3e5c3a;border:none;padding:6px 12px;border-radius:5px;cursor:pointer}
+.section-title{font-size:22px;margin-top:30px;color:#3e5c3a}
+.map iframe{width:100%;height:300px;border-radius:10px;border:none}
+</style>
+</head>
+<body>
+<header>
+<img src="img/logorestaurante.png" class="logo">
+<h1>Restaurante Sloth</h1>
+<p id="subtitle">Disfruta la vida sin prisa</p>
+<button class="language-toggle" onclick="toggleLanguage()">EN / ES</button>
+</header>
+
+<div class="container">
+<div class="tabs" id="tabs"></div>
+<div id="menu"></div>
+</div>
+
+<div class="container map">
+<h2 class="section-title" id="locationTitle">Ubicación</h2>
+<iframe 
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.279416189047!2d-84.94696112518291!3d10.712918389432046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f7553392c981019%3A0x3db3bee48f13fb08!2sBar%20Rest%20R%C3%ADo%20Celeste!5e0!3m2!1ses!2scr!4v1775083321110!5m2!1ses!2scr"
+width="100%" 
+height="300" 
+style="border:0; border-radius:10px;"
+allowfullscreen="" 
+loading="lazy">
+</iframe>
+</div>
+
+<script>
+let language="es";
+let currentCategory="rapidas";
+
+const categories=[
+{id:"rapidas",es:"Comidas rápidas",en:"Fast food"},
+{id:"almuerzos",es:"Almuerzos",en:"Lunch"},
+{id:"desayunos",es:"Desayunos",en:"Breakfast"},
+{id:"frescos",es:"Frescos",en:"Drinks"}
+];
+
+const menuData=[
+
+// COMIDAS RAPIDAS
+{cat:"rapidas",es:"Papas",en:"Fries",crc:2000,usd:4,img:"https://tse3.mm.bing.net/th/id/OIP.5UUUjVV3tv0qWrj91VdbHgHaGL?rs=1&pid=ImgDetMain&o=7&rm=3"},
+{cat:"rapidas",es:"Papicarne",en:"Meat Fries",crc:3000,usd:7,img:"menu1.jpg"},
+{cat:"rapidas",es:"Papa Nachos",en:"Loaded Nachos Fries",crc:4500,usd:10,img:"menu1.jpg"},
+{cat:"rapidas",es:"Salchipapas",en:"Sausage Fries",crc:2500,usd:6,img:"https://img.freepik.com/fotos-premium/la-salchipapa-ou-salchipapas-e-uma-comida-rapida-que-consiste-em-rodajas-fritas-de-salchicha-e-papas-fritas-consumidas-como-comida-chamada-na-america-latina_449839-12382.jpg?w=2000"},
+{cat:"rapidas",es:"Nachos",en:"Nachos",crc:4000,usd:9,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Tacos",en:"Tacos",crc:3000,usd:7,img:"https://www.nacion.com/resizer/41zaNKWtInorD0NMbSV0JWsGhSk=/1200x0/center/middle/filters:quality(100)/arc-anglerfish-arc2-prod-gruponacion.s3.amazonaws.com/public/QNMTIHWIIRE6VFDBWVQC5QIYSM.jpg",
+desc_es:"Carne, pollo, queso, salchicha",
+desc_en:"Beef, chicken, cheese, sausage"},
+
+{cat:"rapidas",es:"Hamburguesa",en:"Burger",crc:3000,usd:7,img:"menu1.jpg",
+desc_es:"Carne desmechada, pollo, vegetariano",
+desc_en:"Shredded beef, chicken, vegetarian"},
+
+{cat:"rapidas",es:"Filet de pescado",en:"Fish Fillet",crc:3000,usd:7,img:"https://editorialtelevisa.brightspotcdn.com/dims4/default/cae8fae/2147483647/strip/true/crop/600x338+0+59/resize/1000x563!/quality/90/?url=https:%2F%2Fk2-prod-editorial-televisa.s3.us-east-1.amazonaws.com%2Fbrightspot%2Fwp-content%2Fuploads%2F2022%2F03%2Fpescado-frito.jpg"},
+{cat:"rapidas",es:"Fajitas de pollo y res",en:"Chicken & Beef Fajitas",crc:3500,usd:8,img:"https://cdn0.recetasgratis.net/es/posts/4/9/3/fajitas_de_pollo_con_champinones_61394_orig.jpg"},
+{cat:"rapidas",es:"Pan Pizza",en:"Pan Pizza",crc:1500,usd:4,img:"menu1.jpg"},
+{cat:"rapidas",es:"Camarones al gusto",en:"Shrimp (any style)",crc:5000,usd:10,img:"https://i0.wp.com/lacocinalatina.club/wp-content/uploads/2021/02/Camarones-al-Ajillo-Cocinado-scaled.jpeg?fit=2000%2C1333&ssl=1"},
+{cat:"rapidas",es:"Dedos de pescado",en:"Fish Fingers",crc:3000,usd:7,img:"https://www.bing.com/th?id=OIP.oXFNdVnl-LBN25Iu80gDOAHaHZ"},
+
+{cat:"rapidas",es:"Empanada",en:"Empanada",crc:1700,usd:4,img:"https://i.pinimg.com/originals/90/0d/7f/900d7fc5813c322e8ca2c6dfcae26b94.jpg",
+desc_es:"Carne, pollo, queso, frijoles",
+desc_en:"Beef, chicken, cheese, beans"},
+
+{cat:"rapidas",es:"Platanitos arreglados",en:"Loaded plantains",crc:1700,usd:4,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Elote loco",en:"Crazy corn",crc:1700,usd:4,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Pepino arreglado",en:"Loaded cucumber",crc:1700,usd:4,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Sandía arreglada",en:"Loaded watermelon",crc:1700,usd:4,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Piña arreglada",en:"Loaded pineapple",crc:1700,usd:4,img:"menu1.jpg"},
+
+{cat:"rapidas",es:"Caldosas",en:"Soups",crc:1500,usd:4,img:"https://www.bing.com/th?id=OIP.hnSrIbVxa8AWhHVFcxOuEQHaEK"},
+{cat:"rapidas",es:"Ceviche",en:"Ceviche",crc:2500,usd:6,img:"https://www.jetsetther.com/wp-content/uploads/2019/08/ceviche.jpg"},
+{cat:"rapidas",es:"Perro caliente",en:"Hot Dog",crc:2500,usd:6,img:"https://tse4.mm.bing.net/th/id/OIP.Y3vkvSHVYAQoJBi5DwzspgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"},
+{cat:"rapidas",es:"Chifrijo",en:"Chifrijo",crc:4000,usd:9,img:"https://www.bing.com/th?id=OIP.ST_lODOOsF2sFiDUNg5dOwHaE8"},
+
+// ALMUERZOS
+{cat:"almuerzos",es:"Casados",en:"Casados",crc:3700,usd:8,img:"https://www.numar.net/wp-content/uploads/2020/07/Receta-de-Casado-platillo-t%C3%ADpico-de-Costa-Rica.png",
+desc_es:"Pescado, bistec, cerdo",
+desc_en:"Fish, steak, pork"},
+
+{cat:"almuerzos",es:"Arroces",en:"Rice dishes",crc:4500,usd:10,img:"https://anywhererecipes.com/wp-content/uploads/2025/08/arroz-con-pollo-costa-rica.jpg",
+desc_es:"Pescado, pollo, cerdo",
+desc_en:"Fish, chicken, pork"},
+
+{cat:"almuerzos",es:"Arroz con camarones",en:"Shrimp Rice",crc:5000,usd:11,img:"https://th.bing.com/th/id/R.e64bcd3928ea9261072d18135e524af9?rik=RomnQBfcTCFt1w&pid=ImgRaw&r=0"},
+
+// DESAYUNOS
+{cat:"desayunos",es:"Desayuno típico",en:"Breakfast",crc:2700,usd:6,img:"https://tse4.mm.bing.net/th/id/OIP.Mfgt38iAgumC2yjXm3-JfQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"},
+
+// FRESCOS
+{cat:"frescos",es:"Frescos naturales",en:"Natural drinks",crc:700,usd:2,img:"https://www.bing.com/th?id=OIP.0u_w6FadAQrYnslSGFx6SQHaE7",
+desc_es:"Piña, tamarindo, zanahoria, hierbabuena y limón",
+desc_en:"Pineapple, tamarind, carrot, mint and lemon"},
+
+{cat:"frescos",es:"Batidos en agua",en:"Smoothies (water)",crc:1000,usd:2,img:"https://www.bing.com/th?id=OIP.0wqgW_UdoQnNsodQtgKHpQHaHa",
+desc_es:"Sabores: banano, piña, fresa, mora, chocolate, crema",
+desc_en:"Flavors: banana, pineapple, strawberry, blackberry, chocolate, cream"},
+
+{cat:"frescos",es:"Batidos en leche",en:"Smoothies (milk)",crc:2000,usd:4,img:"https://www.bing.com/th?id=OIP.dOOp0DmQ8LU956DFzYvDRgHaE8",
+desc_es:"Sabores: banano, piña, fresa, mora, chocolate, crema",
+desc_en:"Flavors: banana, pineapple, strawberry, blackberry, chocolate, cream"},
+
+{cat:"frescos",es:"Ensalada de frutas",en:"Fruit Salad",crc:3000,usd:6,img:"https://images.mrcook.app/recipe-image/0193adbc-5f9a-7cc4-b5ab-53a59302d394"},
+
+{cat:"frescos",es:"Granizados",en:"Slushies",crc:1500,usd:3,img:"https://www.bing.com/th?id=OIP.3346VnDYDEDVPr6paqMXLAAAAA"},
+
+{cat:"frescos",es:"Conos",en:"Cones",crc:1500,usd:3,img:"https://media.istockphoto.com/id/1145283783/de/foto/vanille-eiscreme-schaufel-mit-kegel-isoliert-auf-wei%C3%9Fem-hintergrund.jpg?s=612x612&w=0&k=20&c=MwZpmaVr6CYe5ppvyXsP2AHBCro5FDusi8TVU1Ob19w="}
+
+];
+
+function renderTabs(){
+const tabs=document.getElementById("tabs");
+tabs.innerHTML="";
+categories.forEach(cat=>{
+const btn=document.createElement("div");
+btn.className="tab "+(cat.id===currentCategory?"active":"");
+btn.innerText=language==='es'?cat.es:cat.en;
+btn.onclick=()=>{currentCategory=cat.id;renderTabs();renderMenu();};
+tabs.appendChild(btn);
+});}
+
+function renderMenu(){
+const menu=document.getElementById("menu");
+menu.innerHTML="";
+menuData.filter(item=>item.cat===currentCategory).forEach(item=>{
+const div=document.createElement("div");
+div.className="menu-item";
+div.innerHTML=`
+<img src="${item.img}">
+<div class="menu-info">
+<h3>${language==='es'?item.es:item.en}</h3>
+${item.desc_es ? `<p style="font-size:13px;color:#555;">${language==='es'?item.desc_es:item.desc_en}</p>` : ""}
+<p class="price">₡${item.crc} / $${item.usd}</p>
+<a class="btn" href="https://wa.me/50662202314" target="_blank">
+${language==='es'?'Pedir por WhatsApp':'Order via WhatsApp'}
+</a>
+</div>`;
+menu.appendChild(div);
+});}
+
+function toggleLanguage(){
+language=language==='es'?'en':'es';
+document.getElementById("subtitle").innerText=language==='es'?'Disfruta la vida sin prisa':'Enjoy life slowly';
+document.getElementById("locationTitle").innerText=language==='es'?'Ubicación':'Location';
+renderTabs();renderMenu();}
+
+renderTabs();
+renderMenu();
+</script>
+</body>
+</html>
+
+
+
