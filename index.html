@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurante Sloth</title>
+<title>Soda souvenir sloth byl</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
 <style>
 body{margin:0;font-family:'Roboto',sans-serif;background:#f4f1ec}
 header{background:#3e5c3a;color:white;text-align:center;padding:20px}
-.logo{width:120px;
-    height:80px;
-    object-fit:cover;
-    border-radius:50%;}
+.logo{    width:110px;
+    height:auto;
+    object-fit:contain;
+    margin-bottom:8px;}
 h1{font-family:'Playfair Display',serif;margin:10px 0}
 .container{padding:20px}
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
@@ -30,7 +30,7 @@ h1{font-family:'Playfair Display',serif;margin:10px 0}
 <body>
 <header>
 <img src="https://i.postimg.cc/9433KMCt/logorestaurante.png" class="logo">
-<h1>Restaurante Sloth</h1>
+<h1>Soda souvenir sloth byl</h1>
 <p id="subtitle">Disfruta la vida sin prisa</p>
 <button class="language-toggle" onclick="toggleLanguage()">EN / ES</button>
 </header>
@@ -67,10 +67,10 @@ const menuData=[
 
 // COMIDAS RAPIDAS
 {cat:"rapidas",es:"Papas",en:"Fries",crc:2000,usd:4,img:"https://tse3.mm.bing.net/th/id/OIP.5UUUjVV3tv0qWrj91VdbHgHaGL?rs=1&pid=ImgDetMain&o=7&rm=3"},
-{cat:"rapidas",es:"Papicarne",en:"Meat Fries",crc:3500,usd:8,img:"menu1.jpg"},
-{cat:"rapidas",es:"Papa Nachos",en:"Loaded Nachos Fries",crc:4500,usd:10,img:"menu1.jpg"},
+{cat:"rapidas",es:"Papicarne",en:"Meat Fries",crc:3500,usd:8,img:"https://i.postimg.cc/xkjhNFGW/Papicarne.jpg"},
+{cat:"rapidas",es:"Papa Nachos",en:"Loaded Nachos Fries",crc:4500,usd:10,img:"https://i.postimg.cc/mtRwr1yn/papanacho.jpg"},
 {cat:"rapidas",es:"Salchipapas",en:"Sausage Fries",crc:2500,usd:6,img:"https://img.freepik.com/fotos-premium/la-salchipapa-ou-salchipapas-e-uma-comida-rapida-que-consiste-em-rodajas-fritas-de-salchicha-e-papas-fritas-consumidas-como-comida-chamada-na-america-latina_449839-12382.jpg?w=2000"},
-{cat:"rapidas",es:"Nachos",en:"Nachos",crc:4000,usd:9,img:"menu1.jpg"},
+{cat:"rapidas",es:"Nachos",en:"Nachos",crc:4000,usd:9,img:"https://i.postimg.cc/bJjzwz7H/Nachos.jpg"},
 
 {cat:"rapidas",es:"Tacos",en:"Tacos",crc:3000,usd:7,img:"https://www.nacion.com/resizer/41zaNKWtInorD0NMbSV0JWsGhSk=/1200x0/center/middle/filters:quality(100)/arc-anglerfish-arc2-prod-gruponacion.s3.amazonaws.com/public/QNMTIHWIIRE6VFDBWVQC5QIYSM.jpg",
 desc_es:"Carne, pollo, queso, salchicha",
@@ -82,7 +82,7 @@ desc_en:"Shredded beef, chicken, vegetarian"},
 
 {cat:"rapidas",es:"Filet de pescado",en:"Fish Fillet",crc:3000,usd:7,img:"https://editorialtelevisa.brightspotcdn.com/dims4/default/cae8fae/2147483647/strip/true/crop/600x338+0+59/resize/1000x563!/quality/90/?url=https:%2F%2Fk2-prod-editorial-televisa.s3.us-east-1.amazonaws.com%2Fbrightspot%2Fwp-content%2Fuploads%2F2022%2F03%2Fpescado-frito.jpg"},
 {cat:"rapidas",es:"Fajitas de pollo y res",en:"Chicken & Beef Fajitas",crc:3500,usd:8,img:"https://cdn0.recetasgratis.net/es/posts/4/9/3/fajitas_de_pollo_con_champinones_61394_orig.jpg"},
-{cat:"rapidas",es:"Pan Pizza",en:"Pan Pizza",crc:1500,usd:4,img:"menu1.jpg"},
+{cat:"rapidas",es:"Pan Pizza",en:"Pan Pizza",crc:1500,usd:4,img:"https://i.pinimg.com/736x/3a/7a/86/3a7a86a50309ca391d5722c6f737903e.jpg"},
 {cat:"rapidas",es:"Camarones al gusto",en:"Shrimp (any style)",crc:5000,usd:10,img:"https://i0.wp.com/lacocinalatina.club/wp-content/uploads/2021/02/Camarones-al-Ajillo-Cocinado-scaled.jpeg?fit=2000%2C1333&ssl=1"},
 {cat:"rapidas",es:"Dedos de pescado",en:"Fish Fingers",crc:3000,usd:7,img:"https://www.bing.com/th?id=OIP.oXFNdVnl-LBN25Iu80gDOAHaHZ"},
 
@@ -90,15 +90,13 @@ desc_en:"Shredded beef, chicken, vegetarian"},
 desc_es:"Carne, pollo, queso, frijoles",
 desc_en:"Beef, chicken, cheese, beans"},
 
-{cat:"rapidas",es:"Platanitos arreglados",en:"Loaded plantains",crc:1700,usd:4,img:"menu1.jpg"},
+{cat:"rapidas",es:"Platanitos arreglados",en:"Loaded plantains",crc:1700,usd:4,img:"https://i.postimg.cc/W4YH5SnT/Platanos-arreglados.jpg"},
 
-{cat:"rapidas",es:"Elote loco",en:"Crazy corn",crc:1700,usd:4,img:"menu1.jpg"},
+{cat:"rapidas",es:"Elote loco",en:"Crazy corn",crc:1700,usd:4,img:"https://i.postimg.cc/TpLRph2t/Elote-arreglado.jpg"},
 
 {cat:"rapidas",es:"Pepino arreglado",en:"Loaded cucumber",crc:1700,usd:4,img:"https://i.postimg.cc/Z0YnKTyV/Pepino-arreglado.jpg"},
 
-{cat:"rapidas",es:"Sandía arreglada",en:"Loaded watermelon",crc:1700,usd:4,img:"menu1.jpg"},
-
-{cat:"rapidas",es:"Piña arreglada",en:"Loaded pineapple",crc:1700,usd:4,img:"menu1.jpg"},
+{cat:"rapidas",es:"Piña arreglada",en:"Loaded pineapple",crc:1700,usd:4,img:"https://i.postimg.cc/13HTqyVs/Pina-arreglada.jpg"},
 
 {cat:"rapidas",es:"Caldosas",en:"Soups",crc:1500,usd:4,img:"https://www.bing.com/th?id=OIP.hnSrIbVxa8AWhHVFcxOuEQHaEK"},
 {cat:"rapidas",es:"Ceviche",en:"Ceviche",crc:2500,usd:6,img:"https://www.jetsetther.com/wp-content/uploads/2019/08/ceviche.jpg"},
@@ -113,7 +111,7 @@ desc_en:"Fish, steak, pork"},
 {cat:"almuerzos",es:"Arroces",en:"Rice dishes",crc:4500,usd:10,img:"https://anywhererecipes.com/wp-content/uploads/2025/08/arroz-con-pollo-costa-rica.jpg",
 desc_es:"Pescado, pollo, cerdo",
 desc_en:"Fish, chicken, pork"},
-
+{cat:"almuerzos",es:"Almuerzo vegetariano",en:"Vegetarian lunch",crc:4000,usd:9,img:"https://i.postimg.cc/d1XgVnkb/Almuerzo-vegetariano.jpg"},
 {cat:"almuerzos",es:"Arroz con camarones",en:"Shrimp Rice",crc:5000,usd:11,img:"https://th.bing.com/th/id/R.e64bcd3928ea9261072d18135e524af9?rik=RomnQBfcTCFt1w&pid=ImgRaw&r=0"},
 
 // DESAYUNOS
@@ -181,6 +179,7 @@ renderMenu();
 </script>
 </body>
 </html>
+
 
 
 
